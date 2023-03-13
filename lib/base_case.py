@@ -1,7 +1,5 @@
-import json
-import pytest
-import requests
 from requests import Response
+import json.decoder
 
 
 class BaseCase:
