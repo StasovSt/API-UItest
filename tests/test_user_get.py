@@ -39,6 +39,7 @@ class TestUserGet(BaseCase):
         expected_fields = ["username", "email", "lastName", "firstName"]
         Assertions.assert_json_has_keys(response2, expected_fields)
 
+
     def test_get_one_user_details_auth_as_others_user(self):
         """Запрос на получение данных одного юзера авторизованным другим юзером
         Проверка того, что в теле ответа присутствует username
