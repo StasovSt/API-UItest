@@ -1,6 +1,7 @@
 from datetime import datetime
 from requests import Response
 import json.decoder
+from lib.helper import generate_random_string
 
 
 class BaseCase:
@@ -25,7 +26,8 @@ class BaseCase:
 
         return response_as_dict[name]
 
-    def prepare_registration_data(self, email=None):
+    def prepare_registration_data(self, email=None, username_lenght=10):
+        username = generate_random_string(username_lenght)
         if email is None:
             base_part = "learnQa"
             domain = "examplee.comm"
@@ -34,8 +36,22 @@ class BaseCase:
 
         return {
             "password": "12345",
-            "username": "learnQaaa",
+            "username": username,
             "firstName": "learnQaaa",
             "lastName": "learnQaaa",
             "email": email
         }
+
+    def prepare_registration_data_without_one_parameter(self, parameter):
+        if parameter == "email":
+            return {"password": "12345", "username": "learnQaaa", "firstName": "learnQaaa", "lastName": "learnQaaa"}
+        elif parameter == "password":
+            return {"email": "learnQa@examplee.comm", "username": "learnQaaa", "firstName": "learnQaaa", "lastName": "learnQaaa"}
+        elif parameter == "firstName":
+            return {"email": "learnQa@examplee.comm", "username": "learnQaaa", "password": "12345", "lastName": "learnQaaa"}
+        elif parameter == "lastName":
+            return {"email": "learnQa@examplee.comm", "username": "learnQaaa", "password": "12345", "firstName": "learnQaaa"}
+        elif parameter == "username":
+            return {"email": "learnQa@examplee.comm", "firstName": "learnQaaa", "password": "12345", "lastName": "learnQaaa"}
+        else:
+            assert False, "Не указан параметр без которого будет отправляться запрос"
