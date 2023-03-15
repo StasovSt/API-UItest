@@ -119,7 +119,7 @@ class TestUserEdit(BaseCase):
             "email": email2,
             "password": password2
         }
-
+        print(login_data)
         response2 = MyRequests.post("user/login", data=login_data)
 
         auth_sid = self.get_cookie(response2, "auth_sid")
@@ -146,4 +146,66 @@ class TestUserEdit(BaseCase):
         )
         Assertions.assert_json_has_not_key(response4, username1)
 
+    def test_edit_incorrect_email(self):
+        """Негативный тест
+        Использование зарегистрированного юзера (в setup методе)
+        Авторизация юзера
+        Изменение данных (email без символа @)
+        Проверка, что данные не изменились"""
 
+        email = user["email"]
+        password = user["password"]
+        user_id = user['user_id']
+
+        # LOGIN
+        login_data = {
+            "email": email,
+            "password": password
+        }
+        print(login_data)
+
+        response2 = MyRequests.post("user/login", data=login_data)
+
+        auth_sid = self.get_cookie(response2, "auth_sid")
+        token = self.get_header(response2, "x-csrf-token")
+
+        # EDIT
+        new_email = "ChangedEmaildsfs.sdf"
+
+        response3 = MyRequests.put(f"user/{user_id}", headers={"x-csrf-token": token}, cookies={"auth_sid": auth_sid}, data={"email": new_email})
+
+        Assertions.assert_code_status(response3, 400)
+        assert response3.content.decode("utf-8") == f"Invalid email format", \
+            f"Непредвиденный контент: {response3.content}"
+
+    def test_edit_incorrect_firstname(self):
+        """Негативный тест
+        Использование зарегистрированного юзера (в setup методе)
+        Авторизация юзера
+        Изменение данных (email без символа @)
+        Проверка, что данные не изменились"""
+
+        email = user["email"]
+        password = user["password"]
+        user_id = user['user_id']
+
+        # LOGIN
+        login_data = {
+            "email": email,
+            "password": password
+        }
+        print(login_data)
+
+        response2 = MyRequests.post("user/login", data=login_data)
+
+        auth_sid = self.get_cookie(response2, "auth_sid")
+        token = self.get_header(response2, "x-csrf-token")
+
+        # EDIT
+        new_firstname = "C"
+
+        response3 = MyRequests.put(f"user/{user_id}", headers={"x-csrf-token": token}, cookies={"auth_sid": auth_sid}, data={"firstname": new_firstname})
+
+        Assertions.assert_code_status(response3, 400)
+        assert response3.content.decode("utf-8") == f"No data to update", \
+            f"Непредвиденный контент: {response3.content}"
