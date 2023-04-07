@@ -1,5 +1,15 @@
+class URL:
+    BASE_URL = "https://qastand.valhalla.pw/"
+    LOGIN_URL = f"{BASE_URL}login"
+    MAIN_URL = f"{BASE_URL}profile"
+
 
 class AuthData:
+    VALID_AUTH_DATA = {
+        "login": "qa_test@test.ru",
+        "password": "!QAZ2wsx"
+    }
+
     INVALID_AUTH_DATA = [
         ("", "!QAZ2wsx"),
         ("qa_test@test.ru", ""),

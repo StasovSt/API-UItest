@@ -1,3 +1,16 @@
+import pytest
+from selenium.webdriver import Chrome
+
+
+@pytest.fixture()
+def browser():
+    """Вызывается объект класса Chrome (открывается браузер)"""
+    browser = Chrome()
+    yield browser
+    browser.quit()
+
+
+
 def pytest_configure(config):
     """Регристрация маркеров для запуска отмаркированных тестов"""
     config.addinivalue_line(
