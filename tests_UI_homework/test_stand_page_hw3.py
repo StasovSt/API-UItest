@@ -1,6 +1,6 @@
 """Домашнее задание по уроку 3"""
 from selenium.webdriver import Chrome
-from functions import login, element_is_present, element_text, wait_until_clicable
+from lib.functions_UI import login, element_is_present, element_text, wait_until_clicable
 from selenium.webdriver.common.by import By
 
 

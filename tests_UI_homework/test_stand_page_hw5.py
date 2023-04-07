@@ -1,8 +1,6 @@
-import time
-
 from selenium.webdriver import Chrome
 from selenium.webdriver.common.by import By
-from functions import login, wait_text_in_element, wait_until_clicable, check_alert_is_present, wait_until_visible, element_is_present, wait_url_to_be
+from lib.functions_UI import login, wait_text_in_element, wait_until_clicable, check_alert_is_present, wait_until_visible, element_is_present, wait_url_to_be
 
 
 def test_page_with_timer():

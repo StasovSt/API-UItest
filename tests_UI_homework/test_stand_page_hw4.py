@@ -5,7 +5,7 @@ import time
 import pytest
 from selenium.webdriver import Chrome, Keys
 from selenium.webdriver.common.by import By
-from functions import login, element_is_present, element_text
+from lib.functions_UI import login, element_is_present, element_text
 
 
 @pytest.mark.skip

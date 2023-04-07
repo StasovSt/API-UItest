@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 
-from functions import login, wait_text_in_element, wait_until_clicable, check_alert_is_present, wait_until_visible, element_is_present, wait_url_to_be
+from lib.functions_UI import login, wait_until_clicable, wait_until_visible
 
 
 def test_page_new_tab():
